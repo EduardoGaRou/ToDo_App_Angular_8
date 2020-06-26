@@ -1,0 +1,41 @@
+<form [formGroup]="form" class="col-12" novalidate>
+	<div style="text-align: center;">	
+		<h3>Set a title and a task</h3><br>
+		<p>Enter a title: <input type="text" formControlName="title" placeholder="Add title" class="ml-2">
+		</p>
+		<div>
+			<p>
+			Enter a task:
+			<input type="text" formControlName="task" (keyup.enter)="addTask(form)" placeholder="Add task"  minlength="3" required class="ml-2">
+			<span *ngIf="task.invalid && (task.dirty || task.touched)">{{getErrorMsg(task)}}</span>
+			</p>
+		</div>
+	</div>
+	<hr>
+	<div style="text-align: center;">
+		<h3>Set an email and password</h3><br>
+		<div>
+			<p>
+			Enter an email:
+			<input type="text" formControlName="email" placeholder="Add email" class="ml-2">
+			<span *ngIf="email.errors?.emailInvalid && (email.dirty || email.touched)">Invalid email!</span>
+			</p>
+		</div>
+		<div>
+			<p>
+			Enter a password:
+			<input type="password" formControlName="password" placeholder="Set password" required class="ml-2">
+			</p>
+		</div>
+		<div>
+			<p>
+			Confirm password:
+			<input type="password" formControlName="confirmPassword" placeholder="Retype password" required class="ml-2">
+			<span *ngIf="form.errors?.notequal">Password do not match!</span>
+			</p>
+		</div>
+	</div>
+	<hr>
+	<!--input type="text" [(ngModel)]="form.task" (keyup.enter)="addTask()" placeholder="Add new task"-->
+</form>
+<!--p>to-do-form works!</p-->

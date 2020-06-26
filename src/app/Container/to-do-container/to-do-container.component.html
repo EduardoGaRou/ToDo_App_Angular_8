@@ -1,0 +1,6 @@
+<!--p>to-do-container works!</p-->
+<h2 style="text-decoration: underline; font-weight: bold; text-align: center;">List of tasks:</h2><br>
+<div *ngFor="let item of todoList">
+	<app-to-do-item [todoItem]=item (deleted)="deleteTask($event)" (verified)="toggleTask($event)">
+	</app-to-do-item>
+</div>
