@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ToDo } from './../../Interface/to-do';
 import { ToDoService } from './../../Service/to-do-service.service';
@@ -12,7 +13,10 @@ export class ToDoContainerComponent implements OnInit {
 
   todoList: ToDo[] = [];
 
-  constructor(private todoService: ToDoService) { }
+  constructor(
+    private todoService: ToDoService, 
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   	this.getTodoList();
@@ -35,5 +39,13 @@ export class ToDoContainerComponent implements OnInit {
       }
     }
     this.todoList[togPos].completed = this.todoService.toggleComplete(this.todoList[togPos]);
+  }
+
+  toLoginPage() {
+    this.router.navigate(['/login']);
+  }
+
+  toFormPage() {
+    this.router.navigate(['/form']);
   }
 }

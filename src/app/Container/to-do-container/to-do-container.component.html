@@ -1,5 +1,8 @@
 <!--p>to-do-container works!</p-->
-<h2 style="text-decoration: underline; font-weight: bold; text-align: center;">List of tasks:</h2><br>
+<!--app-to-do-form></app-to-do-form-->
+<h2 style="text-decoration: underline; font-weight: bold; text-align: left; display: inline-block;">List of tasks:</h2>
+<button type="submit" class="btn btn-primary ml-5" (click)="toFormPage()" style="display: inline-block;">Set new task</button>
+<button type="submit" class="btn btn-secondary ml-2" (click)="toLoginPage()" style="display: inline-block;">Sign out</button><br>
 <div *ngFor="let item of todoList">
 	<app-to-do-item [todoItem]=item (deleted)="deleteTask($event)" (verified)="toggleTask($event)">
 	</app-to-do-item>

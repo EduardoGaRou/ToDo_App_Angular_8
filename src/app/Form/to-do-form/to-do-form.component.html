@@ -1,24 +1,26 @@
 <form [formGroup]="form" class="col-12" novalidate>
-	<div style="text-align: center;">	
+	<div style="text-align: left;">	
 		<h3>Set a title and a task</h3><br>
-		<p>Enter a title: <input type="text" formControlName="title" placeholder="Add title" class="ml-2">
+		<p>
+		Enter a title:
+		<input type="text" formControlName="title" placeholder="Add title" class="ml-2">
 		</p>
 		<div>
 			<p>
 			Enter a task:
 			<input type="text" formControlName="task" (keyup.enter)="addTask(form)" placeholder="Add task"  minlength="3" required class="ml-2">
-			<span *ngIf="task.invalid && (task.dirty || task.touched)">{{getErrorMsg(task)}}</span>
+			<span *ngIf="task.invalid && (task.dirty || task.touched)" style="color: red">{{getErrorMsg(task)}}</span>
 			</p>
 		</div>
 	</div>
-	<hr>
-	<div style="text-align: center;">
+	<!--hr>
+	<div style="text-align: left;">
 		<h3>Set an email and password</h3><br>
 		<div>
 			<p>
 			Enter an email:
 			<input type="text" formControlName="email" placeholder="Add email" class="ml-2">
-			<span *ngIf="email.errors?.emailInvalid && (email.dirty || email.touched)">Invalid email!</span>
+			<span *ngIf="email.errors?.emailInvalid && (email.dirty || email.touched)" style="color: red">  Invalid email!</span>
 			</p>
 		</div>
 		<div>
@@ -31,11 +33,13 @@
 			<p>
 			Confirm password:
 			<input type="password" formControlName="confirmPassword" placeholder="Retype password" required class="ml-2">
-			<span *ngIf="form.errors?.notequal">Password do not match!</span>
+			<span *ngIf="form.errors?.notequal" style="color: red">  Password do not match!</span>
 			</p>
 		</div>
-	</div>
+	</div-->
 	<hr>
 	<!--input type="text" [(ngModel)]="form.task" (keyup.enter)="addTask()" placeholder="Add new task"-->
+	<button type="button" class="btn btn-secondary" routerLink="/login">Sign out</button>
+	<button type="button" class="btn btn-primary ml-2" routerLink="/todolist">Check tasks</button>
 </form>
-<!--p>to-do-form works!</p-->
+<!--p>to-do-form works!</p--> 
