@@ -7,6 +7,9 @@ import { ToDoLoginComponent } from './Login/to-do-login/to-do-login.component';
 import { ToDoFormComponent } from './Form/to-do-form/to-do-form.component';
 import { ToDoNotFoundComponent } from './Utils/to-do-not-found/to-do-not-found.component';
 
+import { AuthGuard } from './Guards/auth.guard';
+import { CanDeactivateSignupGuard } from './Guards/can-deactivate-signup.guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -19,7 +22,8 @@ const routes: Routes = [
   },
   {
     path: 'signup',
-    component: ToDoSignupComponent
+    component: ToDoSignupComponent,
+    canDeactivate: [CanDeactivateSignupGuard]
   },
   {
     path: 'todolist',
@@ -27,7 +31,8 @@ const routes: Routes = [
   },
   {
     path: 'form',
-    component: ToDoFormComponent
+    component: ToDoFormComponent,
+    canActivate: [AuthGuard]
   },
   {
   	path: '**',

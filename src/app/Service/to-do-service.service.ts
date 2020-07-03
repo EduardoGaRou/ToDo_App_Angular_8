@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ToDo } from './../Interface/to-do';
-import { ToDoUsers } from './../Interface/to-do-users';
+
 
 @Injectable()
 export class ToDoService {
@@ -20,7 +20,6 @@ export class ToDoService {
     }
   ];
   lastId: number;
-  private userList: ToDoUsers[];
 
   constructor(
     private router: Router
@@ -52,14 +51,4 @@ export class ToDoService {
     return !newTodo.completed;
   }
 
-  //Not working yet!!
-  //addTodoUser(newUser: ToDoUsers): void {
-  //  console.log(newUser);
-  //  this.userList.push(newUser);
-  //}
-
-  //Not working yet!!
-  //loadTodoUser(): void {
-  //  return null;
-  //}
 }

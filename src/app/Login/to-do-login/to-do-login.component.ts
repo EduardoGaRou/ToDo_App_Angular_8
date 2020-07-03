@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import { ToDoService } from 'src/app/Service/to-do-service.service';
+import { LoginService } from './../../Service/login-service.service';
 import { ToDoUsers } from './../../Interface/to-do-users';
 import { customValidators } from './../../Utils/customValidators';
 
@@ -12,17 +12,21 @@ import { customValidators } from './../../Utils/customValidators';
   styleUrls: ['./to-do-login.component.css']
 })
 export class ToDoLoginComponent implements OnInit {
-
+  error: string;
+  success: string;
   form: FormGroup;
 
   constructor(
-  	private todoService: ToDoService,
+  	private loginService:LoginService,
   	private fb: FormBuilder,
-  	private router: Router
+  	private router: Router,
+    private actroute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-  	this.form = this.createForm();
+  	this.error = this.actroute.snapshot.queryParamMap.get('error');
+    this.success = this.actroute.snapshot.queryParamMap.get('success');
+    this.form = this.createForm();
   }
 
   createForm(): FormGroup {
@@ -40,15 +44,15 @@ export class ToDoLoginComponent implements OnInit {
     return this.form.get('password') as FormControl;
   }
 
-  //Not working yet!!
-  //loadUser({ valid, value }:{ valid: boolean, value: string }): void {
-  //  if(valid) {
-  //    const auxtodo = new ToDo(value);
-  //    this.todoService.loadTodoUser(auxtodo);
-  //    this.form.reset();
-  //    this.router.navigate(['form']);
-  //  }
-  //}
+  loadUser({ valid, value }:{ valid: boolean, value: ToDoUsers }): void {
+    if(valid) {
+      const myUser = this.loginService.loadTodoUser(value);
+      this.loginService.isAuthenticated = !!myUser.length;
+        
+      if(myUser.length)
+        this.router.navigate(['form']);
+    }
+  }
 
   getErrorMsg(ctrl: FormControl): string | null {
     for(const propertyErrorName in ctrl.errors) {
@@ -63,10 +67,11 @@ export class ToDoLoginComponent implements OnInit {
     }
   }
 
-  toFormPage({ valid, value } : { valid: boolean, value: any }): void {
-  	if (valid) {
-  	  this.router.navigate(['form']);
-  	}
-  }
+  //Auxiliar router
+  //toFormPage({ valid, value } : { valid: boolean, value: any }): void {
+  //	if (valid) {
+  //	  this.router.navigate(['form']);
+  //	}
+  //}
 
 }
