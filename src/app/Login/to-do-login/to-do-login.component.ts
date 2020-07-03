@@ -50,7 +50,7 @@ export class ToDoLoginComponent implements OnInit {
       this.loginService.isAuthenticated = !!myUser.length;
         
       if(myUser.length)
-        this.router.navigate(['form']);
+        this.router.navigate(['todolist']);
     }
   }
 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { ToDoService } from 'src/app/Service/to-do-service.service';
 import { ToDo } from './../../Interface/to-do';
@@ -18,8 +17,7 @@ export class ToDoFormComponent implements OnInit {
 
   constructor(
     private todoService: ToDoService,
-    private fb: FormBuilder,
-    private router: Router
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {

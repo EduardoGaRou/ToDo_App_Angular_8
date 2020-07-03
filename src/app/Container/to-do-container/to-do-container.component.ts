@@ -40,12 +40,4 @@ export class ToDoContainerComponent implements OnInit {
     }
     this.todoList[togPos].completed = this.todoService.toggleComplete(this.todoList[togPos]);
   }
-
-  toLoginPage() {
-    this.router.navigate(['/login']);
-  }
-
-  toFormPage() {
-    this.router.navigate(['/form']);
-  }
 }

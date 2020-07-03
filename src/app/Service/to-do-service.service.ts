@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 
 import { ToDo } from './../Interface/to-do';
 
-
 @Injectable()
 export class ToDoService {
 
@@ -36,9 +35,8 @@ export class ToDoService {
       newTodo.id = ++this.lastId;
   	}
   	newTodo.task = newTodo.task.trim();
-  	console.log(newTodo);
   	this.todoList.push(newTodo);
-    this.router.navigate(["/todolist"]);
+    this.router.navigate(['todolist']);
   }
 
   deleteTodo(delId: number | string): ToDo[] {
