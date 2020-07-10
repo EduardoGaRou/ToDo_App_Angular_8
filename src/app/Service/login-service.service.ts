@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { ToDoUsers } from './../Interface/to-do-users';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,9 @@ export class LoginService {
   	}
   ];
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   get isAuthenticated(): boolean {
   	return this._isAuthenticated;
@@ -29,6 +32,10 @@ export class LoginService {
     return this.users.filter((data) => data.email === user.email);
   }
 
+  loadTodoPass(user: ToDoUsers) {
+    return this.users.filter((data) => data.password === user.password);
+  }
+
   createTodoUser(newUser: ToDoUsers) {
     let result;
     const userExist = this.loadTodoUser(newUser).length;
@@ -39,6 +46,12 @@ export class LoginService {
       result = { error: 'User already exists!!! :^/' };
     }
     return result;
+  }
+
+  logout() {
+    //console.log(this.isAuthenticated);
+    this.isAuthenticated = false;
+    this.router.navigate(['login']);
   }
 
 }

@@ -46,6 +46,7 @@ export class ToDoService {
   }
 
   toggleComplete(newTodo: ToDo): boolean {
+    console.log(newTodo);
     return !newTodo.completed;
   }
 

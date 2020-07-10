@@ -1,9 +1,16 @@
 <!--p>to-do-container works!</p-->
 <!--app-to-do-form></app-to-do-form-->
 <h2 class="my-4" style="text-decoration: underline; font-weight: bold; text-align: left; display: inline-block;">List of tasks:</h2>
-<button type="submit" class="btn btn-primary ml-5" routerLink="newTask" style="display: inline-block;">Set new task</button>
-<button type="submit" class="btn btn-secondary ml-2" routerLink="/login" style="display: inline-block;">Sign out</button><br>
-<div *ngFor="let item of todoList">
-	<app-to-do-item [todoItem]=item (deleted)="deleteTask($event)" (verified)="toggleTask($event)">
-	</app-to-do-item>
-</div>
+<button type="button" class="btn btn-primary ml-5" routerLink="newTask" style="display: inline-block;">Set new task</button>
+<button type="button" class="btn btn-secondary ml-2" (click)="signout()" style="display: inline-block;">Sign out</button><br>
+
+<app-tab-container>
+	<!--app-tab-item [title]="'All'" id="alltab"></app-tab-item>
+	<app-tab-item [title]="'Completed'" id="comptab"></app-tab-item>
+	<app-tab-item [title]="'Pending'" id="pendtab"></app-tab-item-->
+	<app-tab-item *ngFor="let tab of tablist" [title]="tab">
+		<div *ngFor="let item of todoList | filter:tab">
+			<app-to-do-item [todoItem]=item (deleted)="deleteTask($event)" (verified)="toggleTask($event)"></app-to-do-item>
+		</div>
+	</app-tab-item>
+</app-tab-container>

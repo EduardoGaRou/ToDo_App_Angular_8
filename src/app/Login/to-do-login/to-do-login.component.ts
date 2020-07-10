@@ -47,10 +47,17 @@ export class ToDoLoginComponent implements OnInit {
   loadUser({ valid, value }:{ valid: boolean, value: ToDoUsers }): void {
     if(valid) {
       const myUser = this.loginService.loadTodoUser(value);
-      this.loginService.isAuthenticated = !!myUser.length;
+      let myPass;
+      if(myUser.length) {
+        myPass = this.loginService.loadTodoPass(value);
+      }
+
+      this.loginService.isAuthenticated = false;
         
-      if(myUser.length)
+      if(myPass.length) {
+        this.loginService.isAuthenticated = !!myUser.length;
         this.router.navigate(['todolist']);
+      }
     }
   }
 
