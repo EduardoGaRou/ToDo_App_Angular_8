@@ -2,6 +2,7 @@
 <!--input type="checkbox" name="completed" (click)="toggleItem(todoItem.id)"-->
 <div [id]="todoItem.id" style="display: inline-block;" [ngStyle]="{'text-decoration': todoItem.completed===true ? 'line-through' : 'none' }">{{todoItem.id}} {{todoItem.task}}</div>
 <p>
-<br><button type="button" class="btn btn-success" name="completed" (click)="toggleItem(todoItem.id)">Done</button> <button type="button" class="btn btn-danger ml-3" (click)="deleteItem(todoItem.id)">Delete
-</button>
+<br>
+<button type="button" class="btn btn-success" name="completed" (click)="toggleItem(todoItem.id)">Done</button>
+<button type="button" class="btn btn-danger ml-3" (click)="deleteItem(todoItem.id)">Delete</button>
 </p>

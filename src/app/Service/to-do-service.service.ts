@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { of, Observable, BehaviorSubject } from 'rxjs';
 import { ToDo } from './../Interface/to-do';
 
 @Injectable()
@@ -41,13 +41,23 @@ export class ToDoService {
 
   deleteTodo(delId: number | string): ToDo[] {
     this.todoList = this.todoList.filter((data) => data.id != delId);
-    console.log(this.todoList);
     return this.todoList;
   }
 
-  toggleComplete(newTodo: ToDo): boolean {
-    console.log(newTodo);
-    return !newTodo.completed;
+  toggleComplete(togId: number | string): ToDo[] {
+    this.todoList = this.todoList.map((item: ToDo) => {
+      if (item.id == togId) {
+        item.completed = !item.completed;
+      }
+      return item;
+    });
+    //for (var i=0 ; i<this.todoList.length ; i+=1) {
+    //  if (this.todoList[i].id == togId) {
+    //    this.todoList[i].completed = !this.todoList[i].completed;
+    //    break;
+    //  }
+    //}
+    return this.todoList;
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterContentInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { ToDo } from './../../Interface/to-do';
 import { ToDoService } from './../../Service/to-do-service.service';
@@ -15,6 +16,7 @@ export class ToDoContainerComponent implements OnInit {
   @ViewChild('allTodos') allTodos: ElementRef;
   todoList: ToDo[] = [];
   tablist: string[] = ['All','Completed','Pending'];
+  myfilter: string = 'All';
 
   constructor(
     private todoService: ToDoService,
@@ -44,14 +46,11 @@ export class ToDoContainerComponent implements OnInit {
   }
 
   toggleTask(togId: number | string) {
-    let togPos = 0;
-    for (var i=0 ; i<this.todoList.length ; i+=1) {
-      if (this.todoList[i].id == togId) {
-        togPos = i;
-        break;
-      }
-    }
-    this.todoList[togPos].completed = this.todoService.toggleComplete(this.todoList[togPos]);
+    this.todoList = this.todoService.toggleComplete(togId);
+  }
+
+  onSelectTab(current) {
+    this.myfilter = current.title;
   }
 
   signout() {

@@ -4,13 +4,18 @@
 <button type="button" class="btn btn-primary ml-5" routerLink="newTask" style="display: inline-block;">Set new task</button>
 <button type="button" class="btn btn-secondary ml-2" (click)="signout()" style="display: inline-block;">Sign out</button><br>
 
-<app-tab-container>
-	<!--app-tab-item [title]="'All'" id="alltab"></app-tab-item>
-	<app-tab-item [title]="'Completed'" id="comptab"></app-tab-item>
-	<app-tab-item [title]="'Pending'" id="pendtab"></app-tab-item-->
-	<app-tab-item *ngFor="let tab of tablist" [title]="tab">
-		<div *ngFor="let item of todoList | filter:tab">
+<app-tab-container (selectedTab)="onSelectTab($event)" class="mb-3" style="display: block;">
+	<app-tab-item *ngFor="let tab of tablist" [title]="tab"></app-tab-item>	
+</app-tab-container>
+
+<div *ngIf="todoList | filter:myfilter as filteredList">
+	<div *ngIf="filteredList.length; else emptyTab">
+		<div *ngFor="let item of filteredList">
 			<app-to-do-item [todoItem]=item (deleted)="deleteTask($event)" (verified)="toggleTask($event)"></app-to-do-item>
 		</div>
-	</app-tab-item>
-</app-tab-container>
+	</div>
+
+	<ng-template #emptyTab>
+		<h6>No items found in this tab!!</h6>
+	</ng-template>
+</div>
